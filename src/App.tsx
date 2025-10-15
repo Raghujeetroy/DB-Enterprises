@@ -337,13 +337,13 @@ function App() {
                 <p className="text-[#1F2937]/80">
                   <span className="font-semibold">Email:</span><br />
                   <a href="mailto:info@dbenterprises.com" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]">
-                    info@dbenterprises.com
+                    info@dbenterprisedigital.com
                   </a>
                 </p>
               </div>
             </div>
 
-            <div className={`bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#00E0FF]/20 transition-all duration-500 hover:scale-105 border border-[#00E0FF]/20 ${
+            {/* <div className={`bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#00E0FF]/20 transition-all duration-500 hover:scale-105 border border-[#00E0FF]/20 ${
               visibleSections.has('contact') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
               <h3 className="text-xl font-bold text-[#1F2937] mb-4">Visit Us Online</h3>
@@ -353,7 +353,7 @@ function App() {
                   www.dbenterprises.com
                 </a>
               </p>
-            </div>
+            </div> */}
           </div>
 
           <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 ${
