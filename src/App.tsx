@@ -350,7 +350,7 @@ function App() {
               <p className="text-[#1F2937]/80 text-left">
                 <span className="font-semibold">Address:</span><br />
                 <p className="text-[#0056D2] transition-all duration-300 hover:text-[#7B61FF]"  rel="noopener noreferrer">
-                  Plot no-68, Phase-IV, Udyog Vihar, Sector-18, Gurugram, Haryana-122018
+                  Plot no-68, Phase-IV, Udyog Vihar, Sector-18, Gurugram, Haryana-122018.
                 </p>
               </p>
             </div>
