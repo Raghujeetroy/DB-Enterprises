@@ -343,17 +343,17 @@ function App() {
               </div>
             </div>
 
-            {/* <div className={`bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#00E0FF]/20 transition-all duration-500 hover:scale-105 border border-[#00E0FF]/20 ${
+            <div className={`bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#00E0FF]/20 transition-all duration-500 hover:scale-105 border border-[#00E0FF]/20 ${
               visibleSections.has('contact') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
-              <h3 className="text-xl font-bold text-[#1F2937] mb-4">Visit Us Online</h3>
+              <h3 className="text-xl font-bold text-[#1F2937] mb-4">Visit Us</h3>
               <p className="text-[#1F2937]/80 text-left">
-                <span className="font-semibold">Website:</span><br />
-                <a href="https://www.dbenterprises.com" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]" target="_blank" rel="noopener noreferrer">
-                  www.dbenterprises.com
-                </a>
+                <span className="font-semibold">Address:</span><br />
+                <p className="text-[#0056D2] transition-all duration-300 hover:text-[#7B61FF]"  rel="noopener noreferrer">
+                  Plot no-68, Phase-IV, Udyog Vihar, Sector-18, Gurugram, Haryana-122018
+                </p>
               </p>
-            </div> */}
+            </div>
           </div>
 
           <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 ${
