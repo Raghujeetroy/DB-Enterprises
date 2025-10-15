@@ -366,7 +366,7 @@ function App() {
               WhatsApp Us
             </a>
             <a
-              href="mailto:info@dbenterprises.com"
+              href="mailto:info@dbenterprisedigital.com"
               className="inline-flex items-center justify-center border-2 border-[#7B61FF] text-[#7B61FF] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#7B61FF]/10 hover:border-[#00E0FF] hover:text-[#00E0FF] transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
               Send Email
