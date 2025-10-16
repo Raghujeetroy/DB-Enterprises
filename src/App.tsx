@@ -64,13 +64,13 @@ function App() {
   const testimonials = [
     {
       quote: 'DB Enterprises helped us automate our operations and save 40% in costs — true professionals.',
-      author: 'Anita Sharma',
-      position: 'CEO, NeoTech Systems',
+      author: 'Aditya Arora',
+      position: 'Advocate',
     },
     {
       quote: 'Our new website and AI tools from DB Enterprises took our sales to the next level.',
-      author: 'Rahul Mehta',
-      position: 'FinSmart Solutions',
+      author: 'Rahujeet Roy',
+      position: 'CEO, Divyara Candle',
     },
   ];
 
