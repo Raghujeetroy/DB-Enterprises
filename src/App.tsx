@@ -1,9 +1,10 @@
-import { ArrowRight, Bot, Building2, DollarSign, Palette, Server, CheckCircle, Menu, X, Sparkles } from 'lucide-react';
+import { ArrowRight, Bot, Building2, DollarSign, Palette, Server, CheckCircle, Menu, X, Sparkles, ChevronDown } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
 
   useEffect(() => {
@@ -73,6 +74,10 @@ function App() {
       position: 'CEO, Divyara Candle',
     },
   ];
+
+  // function disclosureOpen(arg0: boolean): void {
+  //   throw new Error('Function not implemented.');
+  // }
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -374,6 +379,60 @@ function App() {
           </div>
         </div>
       </section>
+
+       {/* Disclosure Section */}
+<section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#F8FAFC] to-[#7B61FF]/5 border-t border-[#7B61FF]/20">
+  <div className="max-w-4xl mx-auto">
+    <button
+      onClick={() => setDisclosureOpen(prev => !prev)}
+      className="w-full flex items-center justify-between p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-[#7B61FF]/20 group"
+    >
+      <div className="flex items-center space-x-3">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0056D2] to-[#7B61FF] flex items-center justify-center text-white font-bold text-sm">
+          i
+        </div>
+        <div className="text-left">
+          <h3 className="font-semibold text-[#1F2937]">Disclosure & Association</h3>
+          <p className="text-sm text-[#1F2937]/60">Finnable Partnership Information</p>
+        </div>
+      </div>
+      <ChevronDown
+        className={`h-5 w-5 text-[#7B61FF] transition-transform duration-300 ${
+          disclosureOpen ? 'rotate-180' : ''
+        }`}
+      />
+    </button>
+
+    {disclosureOpen && (
+      <div className="mt-4 p-6 bg-white rounded-lg shadow-lg border border-[#7B61FF]/20 animate-fade-in-up">
+        <div className="space-y-4 text-[#1F2937]">
+          <p>
+            <span className="font-semibold text-[#0056D2]">Company Association:</span>
+            {' '}We are a registered and authorized vendor associated with Finnable.
+          </p>
+
+          <p>
+            <span className="font-semibold text-[#0056D2]">Data Processing:</span>
+            {' '}Data is processed strictly for operational and service improvement purposes.
+          </p>
+
+          <p>
+            <span className="font-semibold text-[#0056D2]">Data Protection:</span>
+            {' '}We comply with all applicable data protection laws.
+          </p>
+
+          <div className="bg-gradient-to-r from-[#7B61FF]/10 to-[#00E0FF]/10 p-4 rounded-lg border border-[#7B61FF]/20">
+            <p className="text-sm">
+              <span className="font-semibold">Consent:</span>
+              {' '}By using our services, you consent to this disclosure.
+            </p>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
