@@ -408,25 +408,28 @@ function App() {
         <div className="space-y-4 text-[#1F2937]">
           <p>
             <span className="font-semibold text-[#0056D2]">Company Association:</span>
-            {' '}We are a registered and authorized vendor associated with Finnable.
+            {' '}We hereby disclose that our company is a registered and authorized vendor and is proudly associated with Finnable.
           </p>
 
           <p>
             <span className="font-semibold text-[#0056D2]">Data Processing:</span>
-            {' '}Data is processed strictly for operational and service improvement purposes.
+            {' '}  As part of this association, we may receive, process, and utilize business-related data provided by Finnable strictly for operational, analytical, and service-related purposes required to run and improve our business offerings.
           </p>
 
           <p>
             <span className="font-semibold text-[#0056D2]">Data Protection:</span>
-            {' '}We comply with all applicable data protection laws.
+            {' '}All data shared is handled in compliance with applicable laws, confidentiality obligations, and data protection standards. We do not misuse, sell, or disclose such data to any unauthorized third party.
           </p>
 
           <div className="bg-gradient-to-r from-[#7B61FF]/10 to-[#00E0FF]/10 p-4 rounded-lg border border-[#7B61FF]/20">
             <p className="text-sm">
               <span className="font-semibold">Consent:</span>
-              {' '}By using our services, you consent to this disclosure.
+              {' '} By using our website and services, you acknowledge and consent to this association and the lawful use of data as described above.
             </p>
           </div>
+          <p className="text-xs text-[#1F2937]/60 mt-6 pt-4 border-t border-[#7B61FF]/10">
+                  Terms & Conditions (TNC)
+                </p>
         </div>
       </div>
     )}
