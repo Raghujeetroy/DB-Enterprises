@@ -1,11 +1,12 @@
-import { ArrowRight, Bot, Building2, DollarSign, Palette, Server, CheckCircle, Menu, X, Sparkles, ChevronDown } from 'lucide-react';
+import { ArrowRight, Bot, Building2, DollarSign, Palette, Server, CheckCircle, Menu, X, Sparkles, ChevronDown, ArrowLeft } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [disclosureOpen, setDisclosureOpen] = useState(false);
   const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [disclosureOpen, setDisclosureOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState<'home' | 'privacy' | 'terms'>('home');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -65,19 +66,15 @@ function App() {
   const testimonials = [
     {
       quote: 'DB Enterprises helped us automate our operations and save 40% in costs — true professionals.',
-      author: 'Aditya Arora',
-      position: 'Advocate',
+      author: 'Anita Sharma',
+      position: 'CEO, NeoTech Systems',
     },
     {
       quote: 'Our new website and AI tools from DB Enterprises took our sales to the next level.',
-      author: 'Rahujeet Roy',
-      position: 'CEO, Divyara Candle',
+      author: 'Rahul Mehta',
+      position: 'FinSmart Solutions',
     },
   ];
-
-  // function disclosureOpen(arg0: boolean): void {
-  //   throw new Error('Function not implemented.');
-  // }
 
   return (
     <div className="min-h-screen bg-white overflow-hidden">
@@ -87,7 +84,7 @@ function App() {
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2 group cursor-pointer">
+            <button onClick={() => setCurrentPage('home')} className="flex items-center space-x-2 group cursor-pointer">
               <div className="relative">
                 <Bot className="h-8 w-8 text-[#0056D2] transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110" />
                 <div className="absolute inset-0 bg-[#7B61FF] opacity-0 group-hover:opacity-30 blur-xl transition-opacity duration-300"></div>
@@ -95,7 +92,7 @@ function App() {
               <span className="text-xl font-bold bg-gradient-to-r from-[#0056D2] to-[#7B61FF] bg-clip-text text-transparent transition-all duration-300 group-hover:from-[#7B61FF] group-hover:to-[#00E0FF]">
                 DB Enterprises
               </span>
-            </div>
+            </button>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
@@ -141,7 +138,338 @@ function App() {
         </div>
       </nav>
 
-      {/* Animated Background Elements */}
+      {currentPage === 'privacy' || currentPage === 'terms' ? (
+        <>
+          {/* Privacy Policy or Terms Page */}
+          <div className="pt-20 pb-20 px-4 sm:px-6 lg:px-8 min-h-screen bg-gradient-to-br from-white via-[#F8FAFC] to-white">
+            <div className="max-w-4xl mx-auto">
+              <button
+                onClick={() => setCurrentPage('home')}
+                className="flex items-center space-x-2 text-[#0056D2] hover:text-[#7B61FF] transition-all duration-300 mb-8 group"
+              >
+                <ArrowLeft className="h-5 w-5 transition-transform group-hover:-translate-x-1 duration-300" />
+                <span>Back to Home</span>
+              </button>
+
+              {currentPage === 'privacy' && (
+              <div className="bg-white p-8 rounded-xl shadow-lg border border-[#7B61FF]/20 animate-fade-in-up">
+                <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#0056D2] to-[#7B61FF] bg-clip-text text-transparent mb-2">
+                  Privacy Policy
+                </h1>
+                <p className="text-[#1F2937]/60 mb-8">Last Updated: January 5, 2026</p>
+
+                <div className="space-y-8 text-[#1F2937]">
+                  <p className="text-lg leading-relaxed">
+                    This Privacy Policy describes how DB Enterprises collects, uses, stores, shares, and protects your information when you visit or use our website or services.
+                  </p>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">1. Interpretation and Definitions</h2>
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">Interpretation</h3>
+                        <p className="text-[#1F2937]/80">Words with capitalized initials have meanings defined below. These definitions apply whether they appear in singular or plural.</p>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">Definitions</h3>
+                        <ul className="space-y-2 text-[#1F2937]/80">
+                          <li><span className="font-semibold">Company / We / Us / Our</span> refers to DB Enterprises.</li>
+                          <li><span className="font-semibold">Website</span> refers to https://dbenterprisedigital.com</li>
+                          <li><span className="font-semibold">User / You</span> means any individual or entity accessing or using our Services.</li>
+                          <li><span className="font-semibold">Services</span> refers to all digital marketing, consulting, website, branding, and related services offered by DB Enterprises.</li>
+                          <li><span className="font-semibold">Personal Data</span> means information that identifies or can identify an individual.</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">2. The Company and the Services Offered by the Company</h2>
+                    <p className="text-[#1F2937]/80 mb-4">DB Enterprises is a digital services provider offering services including but not limited to:</p>
+                    <ul className="space-y-2 text-[#1F2937]/80 ml-4">
+                      <li>• Digital marketing</li>
+                      <li>• Website development</li>
+                      <li>• Branding & design</li>
+                      <li>• Consulting</li>
+                      <li>• Online business solutions</li>
+                    </ul>
+                    <p className="text-[#1F2937]/80 mt-4">Services may change, expand, or be modified over time without prior notice.</p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">3. Information the Company Collects and Shares</h2>
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">a) Information You Provide</h3>
+                        <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                          <li>• Name</li>
+                          <li>• Email address</li>
+                          <li>• Phone number</li>
+                          <li>• Business details</li>
+                          <li>• Any information submitted via forms, emails, WhatsApp, or calls</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">b) Automatically Collected Information</h3>
+                        <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                          <li>• IP address</li>
+                          <li>• Browser type</li>
+                          <li>• Device information</li>
+                          <li>• Pages visited</li>
+                          <li>• Cookies and usage data</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">c) Information Sharing</h3>
+                        <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                          <li>• We do not sell your personal data.</li>
+                          <li>• We may share information only with trusted service providers (hosting, analytics, payment processors)</li>
+                          <li>• Legal or government authorities if required by law</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">4. Information Storage and Data Security</h2>
+                    <ul className="space-y-2 text-[#1F2937]/80">
+                      <li>• Data is stored on secure servers hosted by trusted third-party providers.</li>
+                      <li>• We use reasonable administrative, technical, and physical safeguards.</li>
+                      <li>• No system is 100% secure; however, we take all commercially reasonable measures.</li>
+                      <li>• Data may be stored within or outside India, depending on infrastructure providers.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">5. Why the Company Collects Your Information</h2>
+                    <p className="text-[#1F2937]/80 mb-4">We collect information to:</p>
+                    <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                      <li>• Provide and improve our services</li>
+                      <li>• Communicate with you</li>
+                      <li>• Process payments and contracts</li>
+                      <li>• Send updates, offers, or service-related notices</li>
+                      <li>• Comply with legal obligations</li>
+                      <li>• Prevent fraud or misuse</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">6. Export or Deletion of Your Information</h2>
+                    <p className="text-[#1F2937]/80 mb-4">You may request:</p>
+                    <ul className="space-y-2 text-[#1F2937]/80 ml-4">
+                      <li>• A copy of your stored personal data</li>
+                      <li>• Correction or deletion of your data</li>
+                    </ul>
+                    <p className="text-[#1F2937]/80 mt-4">Requests can be sent to the contact details mentioned below. We may retain certain data if required by law or for legitimate business purposes.</p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">7. Requirement for Availing Our Services</h2>
+                    <p className="text-[#1F2937]/80 mb-4">Providing certain personal information is mandatory to:</p>
+                    <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                      <li>• Enter into service agreements</li>
+                      <li>• Receive services</li>
+                      <li>• Process payments</li>
+                    </ul>
+                    <p className="text-[#1F2937]/80 mt-4">Failure to provide required information may result in inability to deliver services.</p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">8. Refund / Cancellation Policy</h2>
+                    <ul className="space-y-2 text-[#1F2937]/80">
+                      <li>• Refunds are applicable only if services are not delivered as agreed.</li>
+                      <li>• Partial refunds may apply for unused portions of services.</li>
+                      <li>• No refund once service execution has started, unless legally required.</li>
+                      <li>• No refunds for delays caused by third-party platforms, force majeure, or client-side delays.</li>
+                      <li>• Detailed refund terms may also be governed by individual service agreements.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">9. Links to Other Websites</h2>
+                    <ul className="space-y-2 text-[#1F2937]/80">
+                      <li>• Our website may contain links to third-party websites.</li>
+                      <li>• We are not responsible for their privacy practices or content.</li>
+                      <li>• We recommend reviewing their privacy policies separately.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">10. Changes to This Policy</h2>
+                    <ul className="space-y-2 text-[#1F2937]/80">
+                      <li>• We may update this Privacy Policy at any time.</li>
+                      <li>• Changes will be effective immediately upon posting on the Website.</li>
+                      <li>• Continued use of services implies acceptance of the updated policy.</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">11. Your Legal Rights and Responsibilities</h2>
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">You have the right to:</h3>
+                        <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                          <li>• Access your personal data</li>
+                          <li>• Request corrections or deletion</li>
+                          <li>• Withdraw consent (where applicable)</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-[#1F2937] mb-2">You are responsible for:</h3>
+                        <ul className="space-y-1 text-[#1F2937]/80 ml-4">
+                          <li>• Providing accurate information</li>
+                          <li>• Using our services lawfully</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-[#0056D2]/10 to-[#7B61FF]/10 p-6 rounded-lg border border-[#7B61FF]/20">
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-4">12. Contact Us</h2>
+                    <p className="text-[#1F2937]/80 mb-4">For privacy-related queries, contact:</p>
+                    <div className="space-y-2 text-[#1F2937]/80">
+                      <p><span className="font-semibold">DB Enterprises</span></p>
+                      <p><span className="font-semibold">Email:</span> <a href="mailto:info@dbenterprises.com" className="text-[#0056D2] hover:text-[#7B61FF]">info@dbenterprises.com</a></p>
+                      <p><span className="font-semibold">Website:</span> <a href="https://dbenterprisedigital.com" className="text-[#0056D2] hover:text-[#7B61FF]" target="_blank" rel="noopener noreferrer">https://dbenterprisedigital.com</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              )}
+
+              {currentPage === 'terms' && (
+              <div className="bg-white p-8 rounded-xl shadow-lg border border-[#7B61FF]/20 animate-fade-in-up">
+                <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#0056D2] to-[#7B61FF] bg-clip-text text-transparent mb-2">
+                  Terms & Conditions
+                </h1>
+                <p className="text-[#1F2937]/60 mb-8">
+                  Last Updated: January 5, 2026
+                </p>
+
+                <div className="space-y-8 text-[#1F2937] text-lg leading-relaxed">
+                  <p>
+                    These Terms & Conditions ("Terms") govern your use of the website
+                    <strong> https://dbenterprisedigital.com </strong>
+                    operated by <strong>DB Enterprises</strong>.
+                    By accessing or using our website or services, you agree to be bound
+                    by these Terms.
+                  </p>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">1. Services</h2>
+                    <p>
+                      DB Enterprises provides digital services including digital
+                      marketing, website development, branding, consulting, AI-based
+                      solutions, and related services. Services are subject to
+                      availability and agreement.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      2. User Responsibilities
+                    </h2>
+                    <ul className="list-disc ml-6 space-y-2">
+                      <li>Use the website only for lawful purposes</li>
+                      <li>Provide accurate and truthful information</li>
+                      <li>Do not attempt to hack, misuse, or disrupt systems</li>
+                      <li>Do not copy or resell content without permission</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      3. Payments & Taxes
+                    </h2>
+                    <p>
+                      Payments must be made as per agreed invoices or proposals. All
+                      applicable taxes, duties, or government charges are borne by the
+                      client unless stated otherwise.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      4. Refund Policy
+                    </h2>
+                    <p>
+                      Refunds are applicable only if services are not delivered as
+                      agreed. No refunds are provided once service execution has
+                      started, except where required by law.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      5. Intellectual Property
+                    </h2>
+                    <p>
+                      All website content, designs, logos, text, and materials are the
+                      intellectual property of DB Enterprises. Unauthorized use is
+                      strictly prohibited.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      6. Disclaimer
+                    </h2>
+                    <p>
+                      All services are provided on an "as is" basis. We do not guarantee
+                      specific results, revenue, or business growth.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      7. Limitation of Liability
+                    </h2>
+                    <p>
+                      Our total liability shall not exceed the amount paid by the client
+                      for the specific service. We are not liable for indirect or
+                      consequential damages.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      8. Termination
+                    </h2>
+                    <p>
+                      We reserve the right to suspend or terminate access if these Terms
+                      are violated or if required by law.
+                    </p>
+                  </div>
+
+                  <div>
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      9. Governing Law
+                    </h2>
+                    <p>
+                      These Terms shall be governed by the laws of India. Courts located
+                      in India shall have exclusive jurisdiction.
+                    </p>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-[#0056D2]/10 to-[#7B61FF]/10 p-6 rounded-lg border border-[#7B61FF]/20">
+                    <h2 className="text-2xl font-bold text-[#0056D2] mb-3">
+                      10. Contact Information
+                    </h2>
+                    <p>
+                      <strong>DB Enterprises</strong><br />
+                      Email: info@dbenterprises.com<br />
+                      Website: https://dbenterprisedigital.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+              )}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#7B61FF]/20 rounded-full blur-3xl animate-float"></div>
         <div className="absolute top-40 right-10 w-96 h-96 bg-[#00E0FF]/20 rounded-full blur-3xl animate-float-delayed"></div>
@@ -342,7 +670,7 @@ function App() {
                 <p className="text-[#1F2937]/80">
                   <span className="font-semibold">Email:</span><br />
                   <a href="mailto:info@dbenterprises.com" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]">
-                    info@dbenterprisedigital.com
+                    info@dbenterprises.com
                   </a>
                 </p>
               </div>
@@ -351,12 +679,12 @@ function App() {
             <div className={`bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#00E0FF]/20 transition-all duration-500 hover:scale-105 border border-[#00E0FF]/20 ${
               visibleSections.has('contact') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
-              <h3 className="text-xl font-bold text-[#1F2937] mb-4">Visit Us</h3>
+              <h3 className="text-xl font-bold text-[#1F2937] mb-4">Visit Us Online</h3>
               <p className="text-[#1F2937]/80 text-left">
-                <span className="font-semibold">Address:</span><br />
-                <p className="text-[#0056D2] transition-all duration-300 hover:text-[#7B61FF]"  rel="noopener noreferrer">
-                  Plot no-68, Phase-IV, Udyog Vihar, Sector-18, Gurugram, Haryana-122018.
-                </p>
+                <span className="font-semibold">Website:</span><br />
+                <a href="https://www.dbenterprises.com" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]" target="_blank" rel="noopener noreferrer">
+                  www.dbenterprises.com
+                </a>
               </p>
             </div>
           </div>
@@ -371,7 +699,7 @@ function App() {
               WhatsApp Us
             </a>
             <a
-              href="mailto:info@dbenterprisedigital.com"
+              href="mailto:info@dbenterprises.com"
               className="inline-flex items-center justify-center border-2 border-[#7B61FF] text-[#7B61FF] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#7B61FF]/10 hover:border-[#00E0FF] hover:text-[#00E0FF] transition-all duration-300 hover:scale-105 hover:shadow-lg"
             >
               Send Email
@@ -380,62 +708,58 @@ function App() {
         </div>
       </section>
 
-       {/* Disclosure Section */}
-<section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#F8FAFC] to-[#7B61FF]/5 border-t border-[#7B61FF]/20">
-  <div className="max-w-4xl mx-auto">
-    <button
-      onClick={() => setDisclosureOpen(prev => !prev)}
-      className="w-full flex items-center justify-between p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-[#7B61FF]/20 group"
-    >
-      <div className="flex items-center space-x-3">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0056D2] to-[#7B61FF] flex items-center justify-center text-white font-bold text-sm">
-          i
-        </div>
-        <div className="text-left">
-          <h3 className="font-semibold text-[#1F2937]">Disclosure & Association</h3>
-          <p className="text-sm text-[#1F2937]/60">Finnable Partnership Information</p>
-        </div>
-      </div>
-      <ChevronDown
-        className={`h-5 w-5 text-[#7B61FF] transition-transform duration-300 ${
-          disclosureOpen ? 'rotate-180' : ''
-        }`}
-      />
-    </button>
+      {/* Disclosure Section */}
+      <section className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-[#F8FAFC] to-[#7B61FF]/5 border-t border-[#7B61FF]/20">
+        <div className="max-w-4xl mx-auto">
+          <button
+            onClick={() => setDisclosureOpen(!disclosureOpen)}
+            className="w-full flex items-center justify-between p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-[#7B61FF]/20 group"
+          >
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#0056D2] to-[#7B61FF] flex items-center justify-center text-white font-bold text-sm">
+                i
+              </div>
+              <div className="text-left">
+                <h3 className="font-semibold text-[#1F2937]">Disclosure & Association</h3>
+                <p className="text-sm text-[#1F2937]/60">Finnable Partnership Information</p>
+              </div>
+            </div>
+            <ChevronDown
+              className={`h-5 w-5 text-[#7B61FF] transition-transform duration-300 ${
+                disclosureOpen ? 'rotate-180' : ''
+              }`}
+            />
+          </button>
 
-    {disclosureOpen && (
-      <div className="mt-4 p-6 bg-white rounded-lg shadow-lg border border-[#7B61FF]/20 animate-fade-in-up">
-        <div className="space-y-4 text-[#1F2937]">
-          <p>
-            <span className="font-semibold text-[#0056D2]">Company Association:</span>
-            {' '}We hereby disclose that our company is a registered and authorized vendor and is proudly associated with Finnable.
-          </p>
+          {disclosureOpen && (
+            <div className="mt-4 p-6 bg-white rounded-lg shadow-lg border border-[#7B61FF]/20 animate-fade-in-up">
+              <div className="space-y-4 text-[#1F2937]">
+                <p className="leading-relaxed">
+                  <span className="font-semibold text-[#0056D2]">Company Association:</span> We hereby disclose that our company is a registered and authorized vendor and is proudly associated with Finnable.
+                </p>
 
-          <p>
-            <span className="font-semibold text-[#0056D2]">Data Processing:</span>
-            {' '}  As part of this association, we may receive, process, and utilize business-related data provided by Finnable strictly for operational, analytical, and service-related purposes required to run and improve our business offerings.
-          </p>
+                <p className="leading-relaxed">
+                  <span className="font-semibold text-[#0056D2]">Data Processing:</span> As part of this association, we may receive, process, and utilize business-related data provided by Finnable strictly for operational, analytical, and service-related purposes required to run and improve our business offerings.
+                </p>
 
-          <p>
-            <span className="font-semibold text-[#0056D2]">Data Protection:</span>
-            {' '}All data shared is handled in compliance with applicable laws, confidentiality obligations, and data protection standards. We do not misuse, sell, or disclose such data to any unauthorized third party.
-          </p>
+                <p className="leading-relaxed">
+                  <span className="font-semibold text-[#0056D2]">Data Protection:</span> All data shared is handled in compliance with applicable laws, confidentiality obligations, and data protection standards. We do not misuse, sell, or disclose such data to any unauthorized third party.
+                </p>
 
-          <div className="bg-gradient-to-r from-[#7B61FF]/10 to-[#00E0FF]/10 p-4 rounded-lg border border-[#7B61FF]/20">
-            <p className="text-sm">
-              <span className="font-semibold">Consent:</span>
-              {' '} By using our website and services, you acknowledge and consent to this association and the lawful use of data as described above.
-            </p>
-          </div>
-          <p className="text-xs text-[#1F2937]/60 mt-6 pt-4 border-t border-[#7B61FF]/10">
+                <div className="bg-gradient-to-r from-[#7B61FF]/10 to-[#00E0FF]/10 p-4 rounded-lg border border-[#7B61FF]/20 mt-6">
+                  <p className="text-sm leading-relaxed">
+                    <span className="font-semibold">Consent:</span> By using our website and services, you acknowledge and consent to this association and the lawful use of data as described above.
+                  </p>
+                </div>
+
+                <p className="text-xs text-[#1F2937]/60 mt-6 pt-4 border-t border-[#7B61FF]/10">
                   Terms & Conditions (TNC)
                 </p>
+              </div>
+            </div>
+          )}
         </div>
-      </div>
-    )}
-  </div>
-</section>
-
+      </section>
 
       {/* Footer */}
       <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 px-4 sm:px-6 lg:px-8">
@@ -449,11 +773,28 @@ function App() {
               Empowering Businesses with Intelligence, Innovation & Impact
             </p>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-            <p>&copy; 2025 DB Enterprises. All rights reserved.</p>
+          <div className="mt-8 pt-8 border-t border-gray-700">
+            <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-4">
+              <button
+                onClick={() => setCurrentPage('privacy')}
+                className="text-gray-400 hover:text-[#00E0FF] transition-all duration-300 hover:underline"
+              >
+                Privacy Policy
+              </button>
+              <span className="hidden sm:inline text-gray-600">|</span>
+              <button
+                onClick={() => setCurrentPage('terms')}
+                className="text-gray-400 hover:text-[#00E0FF] transition-all duration-300 hover:underline"
+              >
+                Terms & Conditions
+              </button>
+            </div>
+            <p className="text-center text-gray-400">&copy; 2025 DB Enterprises. All rights reserved.</p>
           </div>
         </div>
       </footer>
+        </>
+      )}
     </div>
   );
 }
