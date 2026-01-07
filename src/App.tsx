@@ -838,7 +838,7 @@ function App() {
                 <div className="bg-gradient-to-br from-[#7B61FF]/10 to-[#00E0FF]/10 p-6 rounded-2xl shadow-lg border border-[#7B61FF]/20 hover:shadow-xl transition-all duration-300 hover:scale-105">
                   <h3 className="text-lg font-bold text-[#1F2937] mb-3">Phone/WhatsApp</h3>
                   <a href="tel:+919999508755" className="text-[#0056D2] hover:text-[#7B61FF] transition-colors duration-300 font-semibold text-lg">
-                    +91-9999508755
+                    +91-9811811165
                   </a>
                 </div>
 
