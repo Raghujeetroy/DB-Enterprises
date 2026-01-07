@@ -1,31 +1,82 @@
-import { ArrowRight, Bot, Building2, DollarSign, Palette, Server, CheckCircle, Menu, X, Sparkles, ChevronDown, ArrowLeft } from 'lucide-react';
+import {
+  ArrowRight, Bot, Building2, DollarSign, Palette, Server,
+  CheckCircle, Menu, X, Sparkles, ChevronDown, ArrowLeft,
+  Send, AlertCircle, CheckIcon
+} from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [visibleSections, setVisibleSections] = useState<Set<string>>(new Set());
+  const [visibleSections, setVisibleSections] = useState(new Set());
   const [disclosureOpen, setDisclosureOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState<'home' | 'privacy' | 'terms'>('home');
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const [formData, setFormData] = useState({
+    name: '', email: '', phone: '', company: '', message: ''
+  });
+  const [formStatus, setFormStatus] = useState('idle');
+  const [formError, setFormError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-
-      const sections = document.querySelectorAll('[data-animate]');
-      sections.forEach((section) => {
+      document.querySelectorAll('[data-animate]').forEach((section) => {
         const rect = section.getBoundingClientRect();
-        const isVisible = rect.top < window.innerHeight * 0.8;
-        if (isVisible) {
-          setVisibleSections((prev) => new Set(prev).add(section.id));
+        if (rect.top < window.innerHeight * 0.8) {
+          setVisibleSections(prev => new Set(prev).add(section.id));
         }
       });
     };
-
     window.addEventListener('scroll', handleScroll);
     handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const validateEmail = (email: string) =>
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const validatePhone = (phone: string) =>
+    phone.replace(/\D/g, '').length >= 10;
+
+  const handleFormChange = (e: { target: { name: any; value: any; }; }) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleFormSubmit = (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setFormError('');
+    setSuccessMessage('');
+
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+      setFormError('Please fill in all required fields.');
+      setFormStatus('error');
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setFormError('Please enter a valid email address.');
+      setFormStatus('error');
+      return;
+    }
+
+    if (!validatePhone(formData.phone)) {
+      setFormError('Please enter a valid phone number.');
+      setFormStatus('error');
+      return;
+    }
+
+    setFormStatus('loading');
+
+    // ✅ Fake submit (no backend)
+    setTimeout(() => {
+      setFormStatus('success');
+      setSuccessMessage('Thank you! Your message has been sent successfully.');
+      setFormData({ name: '', email: '', phone: '', company: '', message: '' });
+    }, 1200);
+  };
 
   const services = [
     {
@@ -647,63 +698,165 @@ function App() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" data-animate className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className={`text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#0056D2] to-[#7B61FF] bg-clip-text text-transparent mb-12 transition-all duration-1000 ${
+      <section id="contact" data-animate className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-[#F8FAFC] to-white">
+        <div className="max-w-5xl mx-auto">
+          <div className={`text-center mb-16 transition-all duration-1000 ${
             visibleSections.has('contact') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
           }`}>
-            Get in Touch
-          </h2>
+            <h2 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-[#0056D2] to-[#7B61FF] bg-clip-text text-transparent mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-xl text-[#1F2937]/70">Fill out the form below and our team will get back to you shortly</p>
+          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className={`bg-gradient-to-br from-[#7B61FF]/10 to-[#00E0FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#7B61FF]/20 transition-all duration-500 hover:scale-105 border border-[#7B61FF]/20 ${
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className={`lg:col-span-2 transition-all duration-1000 ${
               visibleSections.has('contact') ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'
             }`}>
-              <h3 className="text-xl font-bold text-[#1F2937] mb-4">Contact Us</h3>
-              <div className="space-y-3 text-left">
-                <p className="text-[#1F2937]/80">
-                  <span className="font-semibold">Phone/WhatsApp:</span><br />
-                  <a href="tel:+919999508755" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]">
-                    +91-9999508755
-                  </a>
-                </p>
-                <p className="text-[#1F2937]/80">
-                  <span className="font-semibold">Email:</span><br />
-                  <a href="mailto:info@dbenterprises.com" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]">
-                    info@dbenterprises.com
-                  </a>
-                </p>
+              <div className="bg-white p-8 rounded-2xl shadow-xl border border-[#7B61FF]/20 hover:shadow-2xl transition-all duration-300">
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  {formStatus === 'success' && successMessage && (
+                    <div className="p-4 bg-green-50 border border-green-200 rounded-lg flex items-start gap-3 animate-fade-in-up">
+                      <CheckIcon className="h-5 w-5 text-green-600 flex-shrink-0 mt-0.5" />
+                      <p className="text-green-800 text-sm leading-relaxed">{successMessage}</p>
+                    </div>
+                  )}
+
+                  {formStatus === 'error' && formError && (
+                    <div className="p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3 animate-fade-in-up">
+                      <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                      <p className="text-red-800 text-sm leading-relaxed">{formError}</p>
+                    </div>
+                  )}
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div className="relative">
+                      <label htmlFor="name" className="block text-sm font-semibold text-[#1F2937] mb-2">
+                        Full Name <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleFormChange}
+                        placeholder="John Doe"
+                        className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] focus:border-[#7B61FF] focus:ring-2 focus:ring-[#7B61FF]/30 outline-none transition-all duration-300 placeholder:text-[#9CA3AF] hover:border-[#7B61FF]"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <label htmlFor="email" className="block text-sm font-semibold text-[#1F2937] mb-2">
+                        Email Address <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleFormChange}
+                        placeholder="john@example.com"
+                        className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] focus:border-[#7B61FF] focus:ring-2 focus:ring-[#7B61FF]/30 outline-none transition-all duration-300 placeholder:text-[#9CA3AF] hover:border-[#7B61FF]"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <label htmlFor="phone" className="block text-sm font-semibold text-[#1F2937] mb-2">
+                        Phone Number <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleFormChange}
+                        placeholder="+91 9999999999"
+                        className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] focus:border-[#7B61FF] focus:ring-2 focus:ring-[#7B61FF]/30 outline-none transition-all duration-300 placeholder:text-[#9CA3AF] hover:border-[#7B61FF]"
+                      />
+                    </div>
+
+                    <div className="relative">
+                      <label htmlFor="company" className="block text-sm font-semibold text-[#1F2937] mb-2">
+                        Company Name
+                      </label>
+                      <input
+                        type="text"
+                        id="company"
+                        name="company"
+                        value={formData.company}
+                        onChange={handleFormChange}
+                        placeholder="Your Company"
+                        className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] focus:border-[#7B61FF] focus:ring-2 focus:ring-[#7B61FF]/30 outline-none transition-all duration-300 placeholder:text-[#9CA3AF] hover:border-[#7B61FF]"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="relative">
+                    <label htmlFor="message" className="block text-sm font-semibold text-[#1F2937] mb-2">
+                      Message <span className="text-red-500">*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      value={formData.message}
+                      onChange={handleFormChange}
+                      placeholder="Tell us about your project or inquiry..."
+                      rows={6}
+                      className="w-full px-4 py-3 rounded-lg border border-[#E5E7EB] focus:border-[#7B61FF] focus:ring-2 focus:ring-[#7B61FF]/30 outline-none transition-all duration-300 placeholder:text-[#9CA3AF] hover:border-[#7B61FF] resize-none"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={formStatus === 'loading'}
+                    className={`w-full py-3 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${
+                      formStatus === 'loading'
+                        ? 'bg-gray-400 text-white cursor-not-allowed'
+                        : 'bg-gradient-to-r from-[#0056D2] to-[#7B61FF] text-white hover:from-[#7B61FF] hover:to-[#00E0FF] hover:shadow-xl hover:shadow-[#7B61FF]/30 hover:scale-105'
+                    }`}
+                  >
+                    {formStatus === 'loading' ? (
+                      <>
+                        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-5 w-5" />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+                </form>
               </div>
             </div>
 
-            <div className={`bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-8 rounded-xl shadow-lg hover:shadow-xl hover:shadow-[#00E0FF]/20 transition-all duration-500 hover:scale-105 border border-[#00E0FF]/20 ${
+            <div className={`transition-all duration-1000 ${
               visibleSections.has('contact') ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'
             }`}>
-              <h3 className="text-xl font-bold text-[#1F2937] mb-4">Visit Us Online</h3>
-              <p className="text-[#1F2937]/80 text-left">
-                <span className="font-semibold">Website:</span><br />
-                <a href="https://www.dbenterprises.com" className="text-[#0056D2] hover:underline transition-all duration-300 hover:text-[#7B61FF]" target="_blank" rel="noopener noreferrer">
-                  www.dbenterprises.com
-                </a>
-              </p>
-            </div>
-          </div>
+              <div className="space-y-6">
+                <div className="bg-gradient-to-br from-[#7B61FF]/10 to-[#00E0FF]/10 p-6 rounded-2xl shadow-lg border border-[#7B61FF]/20 hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <h3 className="text-lg font-bold text-[#1F2937] mb-3">Phone/WhatsApp</h3>
+                  <a href="tel:+919999508755" className="text-[#0056D2] hover:text-[#7B61FF] transition-colors duration-300 font-semibold text-lg">
+                    +91-9999508755
+                  </a>
+                </div>
 
-          <div className={`flex flex-col sm:flex-row gap-4 justify-center transition-all duration-1000 ${
-            visibleSections.has('contact') ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-          }`} style={{ transitionDelay: '400ms' }}>
-            <a
-              href="tel:+919999508755"
-              className="inline-flex items-center justify-center bg-gradient-to-r from-[#00E0FF] to-[#0056D2] text-white px-8 py-4 rounded-lg text-lg font-semibold hover:from-[#7B61FF] hover:to-[#00E0FF] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#00E0FF]/40"
-            >
-              WhatsApp Us
-            </a>
-            <a
-              href="mailto:info@dbenterprises.com"
-              className="inline-flex items-center justify-center border-2 border-[#7B61FF] text-[#7B61FF] px-8 py-4 rounded-lg text-lg font-semibold hover:bg-[#7B61FF]/10 hover:border-[#00E0FF] hover:text-[#00E0FF] transition-all duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              Send Email
-            </a>
+                <div className="bg-gradient-to-br from-[#00E0FF]/10 to-[#7B61FF]/10 p-6 rounded-2xl shadow-lg border border-[#00E0FF]/20 hover:shadow-xl transition-all duration-300 hover:scale-105">
+                  <h3 className="text-lg font-bold text-[#1F2937] mb-3">Email</h3>
+                  <a href="mailto:info@dbenterprises.com" className="text-[#0056D2] hover:text-[#7B61FF] transition-colors duration-300 font-semibold break-all">
+                    info@dbenterprises.com
+                  </a>
+                </div>
+
+                <div className="bg-gradient-to-br from-[#7B61FF]/5 to-[#00E0FF]/5 p-6 rounded-2xl border border-[#7B61FF]/10">
+                  <h3 className="text-lg font-bold text-[#1F2937] mb-3">Response Time</h3>
+                  <p className="text-[#1F2937]/80 text-sm leading-relaxed">
+                    We typically respond within 24 hours. For urgent inquiries, please call us directly.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
